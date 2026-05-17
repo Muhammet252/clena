@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROJECT // Clena</title>
+    
     <link rel="icon" type="image/png" href="C.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Renk Paleti Oranları (60-30-10 Kuralı) */
@@ -15,6 +17,7 @@
             --text-dark: #001280;
             --card-bg: #ffffff;
             --border-color: #d0e7ff;
+            --text-muted: #b0b0b0;
         }
 
         /* Yumuşak kayma efekti */
@@ -55,6 +58,44 @@
             letter-spacing: -0.5px;
         }
 
+        /* Sağ Taraf Menü Buton Grubu */
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Dil Seçici Grubu */
+        .lang-switcher {
+            display: flex;
+            gap: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 2px 6px;
+        }
+
+        .lang-btn.active {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: #ffffff;
+        }
+
+        .lang-divider {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
         /* Sağ Üstteki Destek Butonu */
         .btn-destek {
             background-color: transparent;
@@ -66,6 +107,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-destek:hover {
@@ -102,7 +144,7 @@
             display: block;
         }
 
-        /* Emojisiz Şık Ses Butonu */
+        /* Ses Butonu */
         .video-audio-btn {
             position: absolute;
             bottom: 30px;
@@ -121,6 +163,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-family: 'Space Mono', monospace;
         }
 
         .video-audio-btn:hover {
@@ -423,7 +466,15 @@
 
     <nav>
         <span class="brand">Clena</span>
-        <button class="btn-destek" onclick="openPopup()">Destek</button>
+        
+        <div class="nav-right-group">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('tr')">TR</button>
+                <span class="lang-divider">|</span>
+                <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+            </div>
+            <button class="btn-destek" id="navSupportBtn" onclick="openPopup()" data-lang="navSupportBtn">Destek</button>
+        </div>
     </nav>
 
     <section class="top-video-section">
@@ -434,7 +485,7 @@
                 </video>
             </div>
         </div>
-        <button id="audioBtn" class="video-audio-btn" onclick="toggleMute()">
+        <button id="audioBtn" class="video-audio-btn" onclick="toggleMute()" data-lang="audioBtnMute">
             Sesi Aç
         </button>
     </section>
@@ -443,76 +494,76 @@
         <img src="1icon.png" alt="Clena Logo" class="app-icon">
         <h1>Clena</h1>
         
-        <div class="motto">"Silmez — önerir. Karar sende kalır."</div>
+        <div class="motto" data-lang="heroMotto">"Silmez — önerir. Karar sende kalır."</div>
         
-        <p class="description">
+        <p class="description" data-lang="heroDesc">
             vizyonuyla galerinizdeki veri kalıntılarını ve gereksiz medyaları akıllıca analiz ederek depolama alanınızı genişletirken, gelişmiş kilit mekanizmasıyla en değerli anılarınızı güvence altına alan yüksek performanslı bir mobil optimizasyon asistanıdır.
         </p>
         
         <div class="hero-buttons">
-            <a href="https://expo.dev/artifacts/eas/bYMJNEPE6ugSqgQ6iQ1xYk.apk?contentType=application/vnd.android.package-archive" class="btn-primary">Hemen Dene</a>
-            <a href="#mimarisi" class="btn-secondary">Daha Fazlası</a>
+            <a href="https://expo.dev/artifacts/eas/bYMJNEPE6ugSqgQ6iQ1xYk.apk?contentType=application/vnd.android.package-archive" class="btn-primary" data-lang="btnTry">Hemen Dene</a>
+            <a href="#mimarisi" class="btn-secondary" data-lang="btnMore">Daha Fazlası</a>
         </div>
     </section>
 
     <section class="features" id="mimarisi">
-        <h2>Uygulama Mimarisi ve Özellikler</h2>
+        <h2 data-lang="featuresTitle">Uygulama Mimarisi ve Özellikler</h2>
         <div class="grid">
             
             <div class="card">
                 <div>
                     <span class="card-tag">// Smart Categorization</span>
-                    <h3>Akıllı Medya Sınıflandırma</h3>
+                    <h3 data-lang="card1Head">Akıllı Medya Sınıflandırma</h3>
                 </div>
-                <p>Galeride gereksiz yer kaplayan ekran görüntülerini, döküman taramalarını, indirilen çöpleri ve kopya fotoğrafları gelişmiş algoritmalarla milisaniyeler içinde birbirinden ayıklar.</p>
+                <p data-lang="card1Desc">Galeride gereksiz yer kaplayan ekran görüntülerini, döküman taramalarını, indirilen çöpleri ve kopya fotoğrafları gelişmiş algoritmalarla milisaniyeler içinde birbirinden ayıklar.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// SVG Donut Chart</span>
-                    <h3>İnteraktif Grafik Paneli</h3>
+                    <h3 data-lang="card2Head">İnteraktif Grafik Paneli</h3>
                 </div>
-                <p>Üçüncü parti kütüphaneler yerine saf vektörel SVG çizimleriyle geliştirilen pasta grafik, cihaz hafızasının doluluk oranını şeffaf ve yüksek performanslı bir şekilde görselleştirir.</p>
+                <p data-lang="card2Desc">Üçüncü parti kütüphaneler yerine saf vektörel SVG çizimleriyle geliştirilen pasta grafik, cihaz hafızasının doluluk oranını şeffaf ve yüksek performanslı bir şekilde görselleştirir.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// Whitelist Locking</span>
-                    <h3>Güvenli Liste Kilit Mekanizması</h3>
+                    <h3 data-lang="card3Head">Güvenli Liste Kilit Mekanizması</h3>
                 </div>
-                <p>Kullanıcı tarafından kilitlenen fotoğrafları otomatik olarak koruma altına alarak, "Tümünü Seç" komutunda bile bu dosyaların yazılımsal olarak bypass edilmesini sağlar.</p>
+                <p data-lang="card3Desc">Kullanıcı tarafından kilitlenen fotoğrafları otomatik olarak koruma altına alarak, "Tümünü Seç" komutunda bile bu dosyaların yazılımsal olarak bypass edilmesini sağlar.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// 5-Second Undo</span>
-                    <h3>Asenkron Geri Al Sistemi</h3>
+                    <h3 data-lang="card4Head">Asenkron Geri Al Sistemi</h3>
                 </div>
-                <p>Silme işlemi tetiklendiğinde devreye giren 5 saniyelik asenkron zaman sayacı, kullanıcının son anda karar değiştirerek işlemi tek tıkla iptal etmesine olanak tanır.</p>
+                <p data-lang="card4Desc">Silme işlemi tetiklendiğinde devreye giren 5 saniyelik asenkron zaman sayacı, kullanıcının son anda karar değiştirerek işlemi tek tıkla iptal etmesine olanak tanır.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// Persistent Storage Counter</span>
-                    <h3>Kalıcı Başarı Sayacı</h3>
+                    <h3 data-lang="card5Head">Kalıcı Başarı Sayacı</h3>
                 </div>
-                <p>Cihazın yerel yerleşik hafızasını kullanarak, uygulamanın kurulduğu ilk günden beri temizlediği toplam veri boyutunu ana ekranda kalıcı olarak raporlar.</p>
+                <p data-lang="card5Desc">Cihazın yerel yerleşik hafızasını kullanarak, uygulamanın kurulduğu ilk günden beri temizlediği toplam veri boyutunu ana ekranda kalıcı olarak raporlar.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// Dynamic Localization</span>
-                    <h3>Çift Dilli Dinamik Arayüz</h3>
+                    <h3 data-lang="card6Head">Çift Dilli Dinamik Arayüz</h3>
                 </div>
-                <p>Gizli ayarlar menüsü üzerinden tek bir dokunuşla tüm uygulama içeriğini Türkçe ve İngilizce dilleri arasında anlık olarak senkronize eder.</p>
+                <p data-lang="card6Desc">Gizli ayarlar menüsü üzerinden tek bir dokunuşla tüm uygulama içeriğini Türkçe ve İngilizce dilleri arasında anlık olarak senkronize eder.</p>
             </div>
 
             <div class="card">
                 <div>
                     <span class="card-tag">// Theme UI Architecture</span>
-                    <h3>Minimalist Gece Mimarisi</h3>
+                    <h3 data-lang="card7Head">Minimalist Gece Mimarisi</h3>
                 </div>
-                <p>60-30-10 renk hiyerarşisine sadık kalınarak tasarlanan premium karanlık ve açık tema desteği, gözü yormayan üst düzey bir kullanıcı deneyimi sunar.</p>
+                <p data-lang="card7Desc">60-30-10 renk hiyerarşisine sadık kalınarak tasarlanan premium karanlık ve açık tema desteği, gözü yormayan üst düzey bir kullanıcı deneyimi sunar.</p>
             </div>
 
         </div>
@@ -520,28 +571,28 @@
 
     <div class="popup-overlay" id="supportPopup">
         <div class="popup-box">
-            <h2>Clena Destek Paneli</h2>
-            <p>Bir sorununuz veya öneriniz mi var? Formu doldurarak geliştirici ekibine anında iletebilirsiniz.</p>
+            <h2 id="popupTitle" data-lang="popupTitle">Clena Destek Paneli</h2>
+            <p id="popupDesc" data-lang="popupDesc">Bir sorununuz veya öneriniz mi var? Formu doldurarak geliştirici ekibine anında iletebilirsiniz.</p>
             
             <form class="popup-form" id="ajaxForm" action="https://formspree.io/f/xkoewdvy" method="POST">
                 <div class="form-group">
-                    <label for="email">E-Posta Adresiniz</label>
+                    <label for="email" id="labelEmail" data-lang="labelEmail">E-Posta Adresiniz</label>
                     <input type="email" id="email" name="_replyto" placeholder="ornek@mail.com" required>
                 </div>
                 <div class="form-group">
-                    <label for="message">Mesajınız</label>
+                    <label for="message" id="labelMessage" data-lang="labelMessage">Mesajınız</label>
                     <textarea id="message" name="message" placeholder="Sorununuzu veya iletinizi buraya yazın..." required></textarea>
                 </div>
                 <div class="popup-buttons">
-                    <button type="button" class="btn-cancel" onclick="closePopup()">Vazgeç</button>
-                    <button type="submit" class="btn-submit" id="submitBtn">Gönder</button>
+                    <button type="button" class="btn-cancel" onclick="closePopup()" data-lang="btnCancel">Vazgeç</button>
+                    <button type="submit" class="btn-submit" id="submitBtn" data-lang="btnSubmit">Gönder</button>
                 </div>
             </form>
         </div>
     </div>
 
     <footer>
-        © 2026 Clena. Tüm hakları saklıdır kanka.
+        <span data-lang="footerText">© 2026 Clena. Tüm hakları saklıdır kanka.</span>
     </footer>
 
     <script>
@@ -552,14 +603,112 @@
         const submitBtn = document.getElementById("submitBtn");
         let isUserUnmuted = false; 
 
-        // FORM GÖNDERME SİHRİ (Formspree sayfasına gitmeyi engeller)
+        // Dil Paketleri Veri Havuzu
+        const translations = {
+            tr: {
+                navSupportBtn: "Destek",
+                audioBtnMute: "Sesi Kapat",
+                audioBtnUnmute: "Sesi Aç",
+                heroMotto: '"Silmez — önerir. Karar sende kalır."',
+                heroDesc: "vizyonuyla galerinizdeki veri kalıntılarını ve gereksiz medyaları akıllıca analiz ederek depolama alanınızı genişletirken, gelişmiş kilit mekanizmasıyla en değerli anılarınızı güvence altına alan yüksek performanslı bir mobil optimizasyon asistanıdır.",
+                btnTry: "Hemen Dene",
+                btnMore: "Daha Fazlası",
+                featuresTitle: "Uygulama Mimarisi ve Özellikler",
+                card1Head: "Akıllı Medya Sınıflandırma",
+                card1Desc: "Galeride gereksiz yer kaplayan ekran görüntülerini, döküman taramalarını, indirilen çöpleri ve kopya fotoğrafları gelişmiş algoritmalarla milisaniyeler içinde birbirinden ayıklar.",
+                card2Head: "İnteraktif Grafik Paneli",
+                card2Desc: "Üçüncü parti kütüphaneler yerine saf vektörel SVG çizimleriyle geliştirilen pasta grafik, cihaz hafızasının doluluk oranını şeffaf ve yüksek performanslı bir şekilde görselleştirir.",
+                card3Head: "Güvenli Liste Kilit Mekanizması",
+                card3Desc: "Kullanıcı tarafından kilitlenen fotoğrafları otomatik olarak koruma altına alarak, \"Tümünü Seç\" komutunda bile bu dosyaların yazılımsal olarak bypass edilmesini sağlar.",
+                card4Head: "Asenkron Geri Al Sistemi",
+                card4Desc: "Silme işlemi tetiklendiğinde devreye giren 5 saniyelik asenkron zaman sayacı, kullanıcının son anda karar değiştirerek işlemi tek tıkla iptal etmesine olanak tanır.",
+                card5Head: "Kalıcı Başarı Sayacı",
+                card5Desc: "Cihazın yerel yerleşik hafızasını kullanarak, uygulamanın kurulduğu ilk günden beri temizlediği toplam veri boyutunu ana ekranda kalıcı olarak raporlar.",
+                card6Head: "Çift Dilli Dinamik Arayüz",
+                card6Desc: "Gizli ayarlar menüsü üzerinden tek bir dokunuşla tüm uygulama içeriğini Türkçe ve İngilizce dilleri arasında anlık olarak senkronize eder.",
+                card7Head: "Minimalist Gece Mimarisi",
+                card7Desc: "60-30-10 renk hiyerarşisine sadık kalınarak tasarlanan premium karanlık ve açık tema desteği, gözü yormayan üst düzey bir kullanıcı deneyimi sunar.",
+                popupTitle: "Clena Destek Paneli",
+                popupDesc: "Bir sorununuz veya öneriniz mi var? Formu doldurarak geliştirici ekibine anında iletebilirsiniz.",
+                labelEmail: "E-Posta Adresiniz",
+                labelMessage: "Mesajınız",
+                btnCancel: "Vazgeç",
+                btnSubmit: "Gönder",
+                sendingBtn: "Gönderiliyor...",
+                inputMsgPlace: "Sorununuzu veya iletinizi buraya yazın...",
+                footerText: "© 2026 Clena. Tüm hakları saklıdır kanka."
+            },
+            en: {
+                navSupportBtn: "Support",
+                audioBtnMute: "Mute",
+                audioBtnUnmute: "Unmute",
+                heroMotto: '"It doesn\'t delete — it suggests. The decision is yours."',
+                heroDesc: "Operating with this vision, Clena is a high-performance mobile optimization assistant that intelligently analyzes data residue and unnecessary media in your gallery to expand your storage space, while securing your most valuable memories with an advanced locking mechanism.",
+                btnTry: "Try Now",
+                btnMore: "Learn More",
+                featuresTitle: "App Architecture & Features",
+                card1Head: "Smart Media Categorization",
+                card1Desc: "Separates unnecessary screenshots, document scans, downloaded junk, and duplicate photos in your gallery within milliseconds using advanced algorithms.",
+                card2Head: "Interactive Chart Panel",
+                card2Desc: "Instead of third-party libraries, the donut chart developed with pure vector SVG graphics visualizes the storage distribution transparently and with high performance.",
+                card3Head: "Secure Whitelist Locking",
+                card3Desc: "Automatically protects photos locked by the user, ensuring these files are software-bypassed even during the \"Select All\" command.",
+                card4Head: "Asynchronous 5-Second Undo",
+                card4Desc: "The 5-second asynchronous timer activated when a deletion is triggered allows the user to change their mind at the last moment and undo the action with a single click.",
+                card5Head: "Persistent Storage Counter",
+                card5Desc: "Using the device's local built-in storage, it persistently reports the total size of cleaned data on the home screen since the very first day the app was installed.",
+                card6Head: "Dynamic Localization UI",
+                card6Desc: "Instantly synchronizes all application content between Turkish and English languages with a single tap through the hidden settings menu.",
+                card7Head: "Minimalist Dark UI Architecture",
+                card7Desc: "Adhering to the 60-30-10 color hierarchy, the premium dark and light theme support provides a top-tier user experience that reduces eye strain.",
+                popupTitle: "Clena Support Panel",
+                popupDesc: "Do you have a problem or suggestion? Fill out the form to instantly forward it to the developer team.",
+                labelEmail: "Your E-Mail Address",
+                labelMessage: "Your Message",
+                btnCancel: "Cancel",
+                btnSubmit: "Submit",
+                sendingBtn: "Sending...",
+                inputMsgPlace: "Write your problem or message here...",
+                footerText: "© 2026 Clena. All rights reserved."
+            }
+        };
+
+        // Dil Değiştirici Yönetimi
+        function switchLanguage(lang) {
+            localStorage.setItem('clenaSelectedLang', lang);
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.getAttribute('onclick').includes(lang)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Form içindeki placeholder ve ses buton dinamikleri
+            document.getElementById('message').placeholder = translations[lang]['inputMsgPlace'];
+            btn.innerHTML = video.muted ? translations[lang]['audioBtnUnmute'] : translations[lang]['audioBtnMute'];
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('clenaSelectedLang') || 'tr';
+            switchLanguage(savedLang);
+        });
+
+        // FORM GÖNDERME SİHRİ (Formspree yönlendirmesini kırar ve anında kapanır)
         form.addEventListener("submit", function(e) {
-            e.preventDefault(); // Sayfa yenilenmesini ve yönlendirmeyi blokla!
+            e.preventDefault(); 
             
-            submitBtn.innerHTML = "Gönderiliyor...";
+            const currentLang = localStorage.getItem('clenaSelectedLang') || 'tr';
+            submitBtn.innerHTML = translations[currentLang]['sendingBtn'];
             submitBtn.disabled = true;
 
-            // Form verilerini arka planda paketle ve asenkron yolla
             const formData = new FormData(form);
             
             fetch(form.action, {
@@ -571,18 +720,17 @@
             })
             .then(response => {
                 if (response.ok) {
-                    alert("Mesajınız başarıyla iletildi kanka!");
-                    form.reset(); // Kutuları temizle
-                    closePopup(); // Pop-up'ı kapat
+                    form.reset(); 
+                    closePopup(); 
                 } else {
-                    alert("Bir hata oluştu, lütfen tekrar dene.");
+                    alert(currentLang === 'tr' ? "Bir hata oluştu, lütfen tekrar dene." : "An error occurred, please try again.");
                 }
             })
             .catch(error => {
-                alert("Bağlantı hatası oluştu kanka.");
+                alert(currentLang === 'tr' ? "Bağlantı hatası oluştu kanka." : "Connection error occurred.");
             })
             .finally(() => {
-                submitBtn.innerHTML = "Gönder";
+                submitBtn.innerHTML = translations[currentLang]['btnSubmit'];
                 submitBtn.disabled = false;
             });
         });
@@ -604,14 +752,15 @@
 
         // Ses Kontrolü
         function toggleMute() {
+            const currentLang = localStorage.getItem('clenaSelectedLang') || 'tr';
             if (video.muted) {
                 video.muted = false;
                 isUserUnmuted = true;
-                btn.innerHTML = "Sesi Kapat";
+                btn.innerHTML = translations[currentLang]['audioBtnMute'];
             } else {
                 video.muted = true;
                 isUserUnmuted = false;
-                btn.innerHTML = "Sesi Aç";
+                btn.innerHTML = translations[currentLang]['audioBtnUnmute'];
             }
         }
 
@@ -621,11 +770,12 @@
         };
 
         const observer = new IntersectionObserver((entries) => {
+            const currentLang = localStorage.getItem('clenaSelectedLang') || 'tr';
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (isUserUnmuted) {
                         video.muted = false;
-                        btn.innerHTML = "Sesi Kapat";
+                        btn.innerHTML = translations[currentLang]['audioBtnMute'];
                     }
                 } else {
                     video.muted = true;
