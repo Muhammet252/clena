@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT // Clena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Renk Paleti Oranları (60-30-10 Kuralı) */
+        :root {
+            --dominant-bg: #f0f9ff;     /* %60 Ana Arka Plan */
+            --secondary-blue: #0017b3;  /* %30 Menü ve Detay Mavisi */
+            --accent-purple: #4700be;   /* %10 Vurgu Moru */
+            --text-dark: #001280;
+            --card-bg: #ffffff;
+            --border-color: #d0e7ff;
+        }
+
+        /* Yumuşak kayma efekti */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--dominant-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Üst Şerit */
+        nav {
+            background-color: var(--secondary-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: relative;
+            z-index: 10;
+        }
+
+        nav .brand {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        /* Sağ Üstteki Destek Butonu */
+        .btn-destek {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-destek:hover {
+            background-color: #ffffff;
+            color: var(--secondary-blue);
+            transform: translateY(-1px);
+        }
+
+        /* Video Alanı */
+        .top-video-section {
+            width: 100%;
+            background-color: #000; 
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .video-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .hero-video {
+            width: 100%;
+            max-height: 75vh; 
+            object-fit: cover; 
+            display: block;
+        }
+
+        /* Emojisiz Şık Ses Butonu */
+        .video-audio-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 5%;
+            background: rgba(0, 23, 179, 0.6);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .video-audio-btn:hover {
+            background: var(--accent-purple);
+            transform: scale(1.05);
+            border-color: #ffffff;
+        }
+
+        /* Giriş Bilgileri Alanı */
+        .hero-info {
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0, 23, 179, 0.15);
+        }
+
+        .hero-info h1 {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--secondary-blue);
+            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+            font-family: 'Syne', sans-serif;
+        }
+
+        .motto {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .hero-info p.description {
+            font-size: 17px;
+            color: #445588;
+            margin-bottom: 45px;
+            max-width: 850px; 
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            text-align: justify; 
+            text-align-last: center;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center; 
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-purple);
+            color: #ffffff;
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #350094;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--secondary-blue);
+            border: 2px solid var(--secondary-blue);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-blue);
+            color: #ffffff;
+        }
+
+        /* Özellikler Bölümü */
+        .features {
+            background-color: #ffffff;
+            padding: 100px 8%;
+            text-align: center;
+            border-top: 1px solid #e1f0fa;
+        }
+
+        .features h2 {
+            font-size: 40px;
+            color: var(--secondary-blue);
+            margin-bottom: 60px;
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            letter-spacing: -1px;
+            padding-top: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 15px 35px rgba(0, 23, 179, 0.08);
+        }
+
+        .card-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--accent-purple);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            color: var(--secondary-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .card p {
+            font-size: 14.5px;
+            color: #556699;
+            line-height: 1.6;
+        }
+
+        /* POP-UP (MODAL) TASARIMI */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 18, 128, 0.4); 
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .popup-box {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 25px 50px rgba(0, 23, 179, 0.15);
+            transform: scale(0.85);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .popup-overlay.active .popup-box {
+            transform: scale(1);
+        }
+
+        .popup-box h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            color: var(--secondary-blue);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .popup-box p {
+            font-size: 14px;
+            color: #556699;
+            margin-bottom: 25px;
+        }
+
+        .popup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--secondary-blue);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fcfdfe;
+            color: var(--text-dark);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--accent-purple);
+        }
+
+        .form-group textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: flex-end; 
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-cancel {
+            background: transparent;
+            color: #556699;
+            border: 1px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-purple);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #350094;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-blue);
+            color: #ffffff;
+            padding: 60px 8%;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <span class="brand">Clena</span>
+        <button class="btn-destek" onclick="openPopup()">Destek</button>
+    </nav>
+
+    <section class="top-video-section">
+        <div class="video-wrapper">
+            <div class="video-container">
+                <video id="myVideo" class="hero-video" autoplay loop muted playsinline>
+                    <source src="C.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <button id="audioBtn" class="video-audio-btn" onclick="toggleMute()">
+            Sesi Aç
+        </button>
+    </section>
+
+    <section class="hero-info">
+        <img src="1icon.png" alt="Clena Logo" class="app-icon">
+        <h1>Clena</h1>
+        
+        <div class="motto">"Silmez — önerir. Karar sende kalır."</div>
+        
+        <p class="description">
+            vizyonuyla galerinizdeki veri kalıntılarını ve gereksiz medyaları akıllıca analiz ederek depolama alanınızı genişletirken, gelişmiş kilit mekanizmasıyla en değerli anılarınızı güvence altına alan yüksek performanslı bir mobil optimizasyon asistanıdır.
+        </p>
+        
+        <div class="hero-buttons">
+            <a href="https://expo.dev/artifacts/eas/bYMJNEPE6ugSqgQ6iQ1xYk.apk?contentType=application/vnd.android.package-archive" class="btn-primary">Hemen Dene</a>
+            <a href="#mimarisi" class="btn-secondary">Daha Fazlası</a>
+        </div>
+    </section>
+
+    <section class="features" id="mimarisi">
+        <h2>Uygulama Mimarisi ve Özellikler</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div>
+                    <span class="card-tag">// Smart Categorization</span>
+                    <h3>Akıllı Medya Sınıflandırma</h3>
+                </div>
+                <p>Galeride gereksiz yer kaplayan ekran görüntülerini, döküman taramalarını, indirilen çöpleri ve kopya fotoğrafları gelişmiş algoritmalarla milisaniyeler içinde birbirinden ayıklar.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// SVG Donut Chart</span>
+                    <h3>İnteraktif Grafik Paneli</h3>
+                </div>
+                <p>Üçüncü parti kütüphaneler yerine saf vektörel SVG çizimleriyle geliştirilen pasta grafik, cihaz hafızasının doluluk oranını şeffaf ve yüksek performanslı bir şekilde görselleştirir.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// Whitelist Locking</span>
+                    <h3>Güvenli Liste Kilit Mekanizması</h3>
+                </div>
+                <p>Kullanıcı tarafından kilitlenen fotoğrafları otomatik olarak koruma altına alarak, "Tümünü Seç" komutunda bile bu dosyaların yazılımsal olarak bypass edilmesini sağlar.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// 5-Second Undo</span>
+                    <h3>Asenkron Geri Al Sistemi</h3>
+                </div>
+                <p>Silme işlemi tetiklendiğinde devreye giren 5 saniyelik asenkron zaman sayacı, kullanıcının son anda karar değiştirerek işlemi tek tıkla iptal etmesine olanak tanır.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// Persistent Storage Counter</span>
+                    <h3>Kalıcı Başarı Sayacı</h3>
+                </div>
+                <p>Cihazın yerel yerleşik hafızasını kullanarak, uygulamanın kurulduğu ilk günden beri temizlediği toplam veri boyutunu ana ekranda kalıcı olarak raporlar.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// Dynamic Localization</span>
+                    <h3>Çift Dilli Dinamik Arayüz</h3>
+                </div>
+                <p>Gizli ayarlar menüsü üzerinden tek bir dokunuşla tüm uygulama içeriğini Türkçe ve İngilizce dilleri arasında anlık olarak senkronize eder.</p>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="card-tag">// Theme UI Architecture</span>
+                    <h3>Minimalist Gece Mimarisi</h3>
+                </div>
+                <p>60-30-10 renk hiyerarşisine sadık kalınarak tasarlanan premium karanlık ve açık tema desteği, gözü yormayan üst düzey bir kullanıcı deneyimi sunar.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="popup-overlay" id="supportPopup">
+        <div class="popup-box">
+            <h2>Clena Destek Paneli</h2>
+            <p>Bir sorununuz veya öneriniz mi var? Formu doldurarak geliştirici ekibine anında iletebilirsiniz.</p>
+            
+            <form class="popup-form" id="ajaxForm" action="https://formspree.io/f/xkoewdvy" method="POST">
+                <div class="form-group">
+                    <label for="email">E-Posta Adresiniz</label>
+                    <input type="email" id="email" name="_replyto" placeholder="ornek@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mesajınız</label>
+                    <textarea id="message" name="message" placeholder="Sorununuzu veya iletinizi buraya yazın..." required></textarea>
+                </div>
+                <div class="popup-buttons">
+                    <button type="button" class="btn-cancel" onclick="closePopup()">Vazgeç</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Clena. Tüm hakları saklıdır kanka.
+    </footer>
+
+    <script>
+        const video = document.getElementById("myVideo");
+        const btn = document.getElementById("audioBtn");
+        const popup = document.getElementById("supportPopup");
+        const form = document.getElementById("ajaxForm");
+        const submitBtn = document.getElementById("submitBtn");
+        let isUserUnmuted = false; 
+
+        // FORM GÖNDERME SİHRİ (Formspree sayfasına gitmeyi engeller)
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); // Sayfa yenilenmesini ve yönlendirmeyi blokla!
+            
+            submitBtn.innerHTML = "Gönderiliyor...";
+            submitBtn.disabled = true;
+
+            // Form verilerini arka planda paketle ve asenkron yolla
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Mesajınız başarıyla iletildi kanka!");
+                    form.reset(); // Kutuları temizle
+                    closePopup(); // Pop-up'ı kapat
+                } else {
+                    alert("Bir hata oluştu, lütfen tekrar dene.");
+                }
+            })
+            .catch(error => {
+                alert("Bağlantı hatası oluştu kanka.");
+            })
+            .finally(() => {
+                submitBtn.innerHTML = "Gönder";
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Pop-up Yönetimi
+        function openPopup() {
+            popup.classList.add("active");
+        }
+
+        function closePopup() {
+            popup.classList.remove("active");
+        }
+
+        window.onclick = function(event) {
+            if (event.target == popup) {
+                closePopup();
+            }
+        }
+
+        // Ses Kontrolü
+        function toggleMute() {
+            if (video.muted) {
+                video.muted = false;
+                isUserUnmuted = true;
+                btn.innerHTML = "Sesi Kapat";
+            } else {
+                video.muted = true;
+                isUserUnmuted = false;
+                btn.innerHTML = "Sesi Aç";
+            }
+        }
+
+        const observerOptions = {
+            root: null,
+            threshold: 0.05 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (isUserUnmuted) {
+                        video.muted = false;
+                        btn.innerHTML = "Sesi Kapat";
+                    }
+                } else {
+                    video.muted = true;
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(video);
+    </script>
+
+</body>
+</html>
